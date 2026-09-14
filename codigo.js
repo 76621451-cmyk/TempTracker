@@ -11,8 +11,8 @@ async function ObtenerClima() {
     }
 
     // URL PERFECTA: Todo en una sola línea con los parámetros correctos
-    const apiClimaActual = `https://api.weatherapi.com/v1/current.json?
-q=${ciudad}&lang=${idioma}&key=${claveApi}`;
+    const apiClimaActual = `https://api.weatherapi.com/v1/current.json?q=${ciudad}&lang=${idioma}&key=${claveApi}`;
+
     try {
         const response = await fetch(apiClimaActual);
         const data = await response.json();
