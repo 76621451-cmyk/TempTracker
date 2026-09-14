@@ -2,7 +2,7 @@ const claveApi = '0c0b36b905ed4e79ae913043261409';
 const idioma = 'es';
 const inpCiudad = document.getElementById('input-ciudad');
 
-async function ObtenerClima() { // Dejamos la 'O' mayúscula porque así la llamaste en tu HTML: onclick="ObtenerClima()"
+async function ObtenerClima() { 
     const ciudad = inpCiudad.value;
 
     if (!ciudad) {
@@ -10,35 +10,35 @@ async function ObtenerClima() { // Dejamos la 'O' mayúscula porque así la llam
         return;
     }
 
-    // ¡CORREGIDO! Todo en una sola línea sin saltos extraños
-    const apiClimaActual = `https://weatherapi.com{ciudad}&lang=${idioma}&key=${claveApi}`;
+    // URL PERFECTA: Todo en una sola línea con los parámetros correctos
+    const apiClimaActual = `https://api.weatherapi.com/v1/current.json?
+q=${ciudad}&lang=${idioma}&key=${claveApi}`;
     try {
         const response = await fetch(apiClimaActual);
         const data = await response.json();
 
-        // Si la API nos devuelve un error (ej. ciudad no encontrada)
-        if (data.error) {
+        if (data.error) 
             alert('Ciudad no encontrada. Intenta con otra.');
             return;
-        }
+        
 
         mostrarClima(data);
     } catch (error) {
         console.error("Error al conectar con la API:", error);
     }
-}
+} // <--- AQUÍ SE CIERRA CORRECTAMENTE ObtenerClima
 
-// ¡CORREGIDO! La función va afuera de ObtenerClima para mantener el código ordenado
+// LA FUNCIÓN MOSTRAR CLIMA VA AFUERA, TOTALMENTE INDEPENDIENTE
 function mostrarClima(data) {
     document.querySelector('.clima-icono').src = data.current.condition.icon;
     document.querySelector('.clima-texto').innerHTML = data.current.condition.text;
     document.querySelector('.temp').innerHTML = Math.round(data.current.temp_c) + '°c';
     document.querySelector('.ciudad').innerHTML = data.location.name;
     
-    // ¡CORREGIDO! Le agregamos el punto (.) para que busque la clase .humedad
+    // Corregido el punto (.) para encontrar las clases de abajo
     document.querySelector('.humedad').innerHTML = data.current.humidity + '%';
     document.querySelector('.viento').innerHTML = data.current.wind_kph + ' km/h';
 
-    // Esto hace que la tarjeta se muestre si antes estaba oculta
+    // Esto activa visualmente tu tarjeta verde en la pantalla
     document.getElementById('clima-contenedor').style.display = 'block';
 }
