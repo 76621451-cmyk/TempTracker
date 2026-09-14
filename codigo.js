@@ -12,7 +12,6 @@ async function ObtenerClima() { // Dejamos la 'O' mayúscula porque así la llam
 
     // ¡CORREGIDO! Todo en una sola línea sin saltos extraños
     const apiClimaActual = `https://weatherapi.com{ciudad}&lang=${idioma}&key=${claveApi}`;
-
     try {
         const response = await fetch(apiClimaActual);
         const data = await response.json();
