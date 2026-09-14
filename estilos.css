@@ -110,5 +110,6 @@ h2 {
 /* LO COMENTAMOS: Si dejas el 'display: none', tu tarjeta se quedará invisible en el navegador. 
    Tu profesor activa esto más adelante mediante JavaScript cuando presionas el botón buscar. */
 #clima-contenedor {
-    /* display: none; */
+    display: none; /* Ahora sí lo ocultamos al principio para que el JS lo muestre al buscar */
 }
+
